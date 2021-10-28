@@ -1,3 +1,7 @@
+__pycache__/
 .DS_Store
 .vscode/
 notes.txt
+test.py
+venv/
+*.so
