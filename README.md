@@ -21,6 +21,7 @@ Once the seed is found, an **action sequence** will be displayed along with corr
 ----------------------------------
 Achievable in 7 actions
 ----------------------------------
+Manip Stage: [PEACH]
 Target: 1077 rolls
 
 1 - Stage Load (12)
