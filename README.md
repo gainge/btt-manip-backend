@@ -12,6 +12,8 @@ To Manip for a pull:
 
 **Roll** random characters in-game and enter them with the UI on the page. Click the "search" button once enough characters have been entered.
 
+![Example of a search being performed](https://i.imgur.com/qGTNOZk.png "Example search")
+
 The first search requires 9 characters, while all subsequent searches require at least 4.
 
 Once the seed is found, an action sequence will be displayed along with corresponding information regarding the RNG event. An example Action sequence may be:
