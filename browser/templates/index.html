@@ -31,10 +31,21 @@
             </label>
         </div>
         <div id="conditions-container">
-            <input type="checkbox" id="aerial-spawn-checkbox" name="aerial-spawn" value="aerial-spawn">
-            <label for="aerial-spawn-checkbox">Aerial Spawn</label><br>
-            <input type="checkbox" id="IBG-checkbox" name="ibg" value="ibg" disabled>
-            <label for="IBG-checkbox">IBG</label><br>
+            <input type="checkbox" id="mismatch-checkbox" name="aerial-spawn" value="mismatch-checkbox" onclick="toggleMismatchOptions()">
+            <label for="mismatch-checkbox" onclick="toggleMismatchOptions()">Mismatch</label><br>
+            <div id="mismatch-control" class="none">
+                <input type="radio" id="ground-spawn" name="spawn" value="ground-spawn" checked>
+                <label for="ground-spawn">Ground Spawn </label><a href="https://i.imgur.com/EaCqbCZ.png" target="_blank">(spawns)</a> <br>
+                <input type="radio" id="aerial-spawn" name="spawn" value=aerial-spawn">
+                <label for="aerial-spawn">Aerial Spawn</label><br>  
+                <input type="radio" id="luigi" name="spawn" value="luigi">
+                <label for="luigi">Luigi</label><br>
+                <input type="radio" id="seak" name="spawn" value="seak">
+                <label for="seak">Seak</label><br>
+                <input type="checkbox" id="IBG-checkbox" name="ibg" value="ibg">
+                <label for="IBG-checkbox">IBG</label><br>
+            </div>
+            
         </div>
     </div>
     <hr>

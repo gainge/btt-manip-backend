@@ -95,6 +95,20 @@ function reset(forceReset = false) {
   }
 }
 
+function toggleMismatchOptions() {
+  // Show or hide mismatch options depending on checkbox state
+  let mismatchCheckbox = document.getElementById('mismatch-checkbox');
+  let mismatchOptions = document.getElementById('mismatch-control');
+
+  if (mismatchCheckbox.checked) {
+    // Show options
+    mismatchOptions.classList.remove('none');
+  } else {
+    // Hide options
+    mismatchOptions.classList.add('none');
+  }
+}
+
 
 function addActionLine(parent, text) {
   let p = document.createElement('p');
@@ -414,6 +428,7 @@ function buildCSS() {
 // build the UI lol
 buildCSS();
 
+window.toggleMismatchOptions = toggleMismatchOptions;
 window.searchForSeed = searchForSeed;
 window.undoChar = undoChar;
 window.clearSeq = clearSeq;

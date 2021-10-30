@@ -38,6 +38,11 @@ h3 {
 }
 
 
+#mismatch-control {
+    margin-left: 2rem;
+}
+
+
 
 
 #content-container {
@@ -157,6 +162,10 @@ img.stock-icon {
 
 .hidden {
     visibility: hidden;
+}
+
+.none {
+    display: none;
 }
 
 
