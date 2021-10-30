@@ -123,6 +123,7 @@ function displayActionSequence(actionSequence, rolls) {
   addActionLine(actionsBlock, '----------------------------------');
   addActionLine(actionsBlock, `Achievable in ${numActions} action${numActions == 1 ? '' : 's'}`);
   addActionLine(actionsBlock, '----------------------------------');
+  addActionLine(actionsBlock, 'Manip Stage: [PEACH]');
   addActionLine(actionsBlock, `Target: ${rolls} rolls`);
   
   actionsBlock.appendChild(document.createElement('br'));
