@@ -3,6 +3,8 @@ Web tool for Melee RNG manipulation in Peach's break the targets.
 
 Use the CSS to locate your seed then perform the specified actions to manip.
 
+This project is heavily inspired by and based on the previous manip work done by Savestate https://github.com/Savestate2A03/ssbm_rng_manip/
+
 # Usage
 Every manip consists of two parts:
 * Locating the Seed by rolling random characters
