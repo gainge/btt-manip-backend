@@ -52,4 +52,4 @@ Then, build the seed-locating library by following the [build instructions for P
 ### For MacOS
 `c++ -O3 -Wall -shared -std=c++11 -undefined dynamic_lookup $(python3 -m pybind11 --includes) rng.cpp -o rng$(python3-config --extension-suffix)`
 
-Then you can run the project with `python3 app.py` and visit it at `http://localhost:5000`
+You can then run the project with `python3 app.py` and visit it at `http://localhost:5000`
