@@ -1,7 +1,7 @@
 # Peach BTT RNG Manip
 Web tool for Melee RNG manipulation in Peach's break the targets.  Use the CSS to locate your seed then perform the specified actions to manip.
 
-This project is heavily inspired by and based on the previous manip work done by Savestate https://github.com/Savestate2A03/ssbm_rng_manip/. Huge thanks to them and their contributions.
+This project is heavily inspired by and based on the previous manip work done by Savestate https://github.com/Savestate2A03/ssbm_rng_manip/. Huge thanks to Savestate and their contributions.
 
 # Usage
 Every manip consists of two parts:
@@ -16,7 +16,7 @@ To Manip for a pull:
 
 The first search requires 9 characters, while all subsequent searches require at least 4.
 
-Once the seed is found, an action sequence will be displayed along with corresponding information regarding the RNG event. An example Action sequence may be:
+Once the seed is found, an **action sequence** will be displayed along with corresponding information regarding the RNG event. An example action sequence may be:
 ```
 ----------------------------------
 Achievable in 7 actions
@@ -30,11 +30,11 @@ Target: 1077 rolls
 1 - Up Tilt (27)
 ```
 
-**Perform** the specified actions in __Peach's break the targets__ to perform the manip.
+**Perform** the specified actions in __Peach's break the targets__ to execute the manip.
 
 For a good (very long) example of what it looks like to manip, see [this video](https://youtu.be/K2MecScQkx8)
 
-***Note*: It's possible for your game's seed and the application's internal seed to become desynced for a number of reasons. If you feel this may have happened, you can always click the "reset" button to re-locate the seed with a new 9-character sequence
+***Note*: It's possible for your game's seed and the application's internal seed to become desynced for a number of reasons. If you feel this may have happened or keep missing pulls, you can always click the "reset" button to re-locate the seed with a new 9-character sequence
 
 # Building Locally
 This project uses Flask and Pybind, and can be run locally if you have python installed.
