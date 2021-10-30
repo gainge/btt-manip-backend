@@ -1,4 +1,4 @@
-import { findSeedDifference, formatHex, rngAdv, rngInt } from './util.js';
+import { findSeedDifference, formatHex, isInt, rngAdv, rngInt } from './util.js';
 import { MANIP_ACTIONS, STAGE_LOAD_ACTION, buildActionSequence } from './rolls.js';
 import { EVENT_SEARCH_MAX_ITERATIONS, searchForEvent, buildCharacterEvents, buildPullEventList } from './event.js';
 

@@ -22,6 +22,12 @@ const formatHex = (n) => {
   return n.toString(16).padStart(8, '0');
 }
 
+const isInt = (value) => {
+  return !isNaN(value) && 
+         parseInt(Number(value)) == value && 
+         !isNaN(parseInt(value, 10));
+}
+
 /* RNG Seed Functions */
 const rngAdv = (seed) => {
   return ((seed * 214013) + 2531011) % 2**32;
@@ -34,4 +40,4 @@ const rngInt = (seed, max) => {
 
 
 
-export { findSeedDifference, formatHex, rngAdv, rngInt }
+export { findSeedDifference, formatHex, isInt, rngAdv, rngInt }
