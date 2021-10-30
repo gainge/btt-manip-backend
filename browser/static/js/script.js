@@ -346,16 +346,25 @@ function searchForNewSeed() {
   }
 
   fetch(url)
-      .then(function (response) {
-        return response.json();
-      }).then(function (result) {
-        clearResults();
-        let seed = result.seed
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error(`Status Code: ${response.status} `);
+      }
+      return response.json();
+    }).then(function (result) {
+      clearResults();
+      let seed = result.seed
 
+      // Check that seed, dog
+      if (!isInt(seed)) {
+        alert(`Error processing seed: ${seed}`)
+      } else {
         processSeed(seed);
-      }).catch(function(error) {
-        console.log("Fetch error: " + error);
-      });
+      }
+    }).catch(function(error) {
+      alert(`Error Executing Search. ${error}`);
+      console.log("Fetch error: " + error);
+    });
 
 }
 
