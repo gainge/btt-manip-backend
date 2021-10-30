@@ -5,13 +5,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}"/>
-    <title>Manip Backend</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>SSBM RNG Manip</title>
 </head>
 <body>
-    <div id="content">
-        <p>Nothing to see here...</p>
+    <div id="header-container">
+        <h id="page-header">Peach BTT RNG Manip</h>
+    </div>
+    <div id="settings-container">
+        <p>Settings:</p>
+        <div id="item-selector">
+            <label>
+                <input type="radio" name="item" value="beamsword" checked>
+                <img src="/static/img/beamsword.png">
+            </label>
+            
+            <label>
+                <input type="radio" name="item" value="bomb">
+                <img src="/static/img/bobomb.png">
+            </label>
+
+            <label>
+                <input type="radio" name="item" value="saturn">
+                <img src="/static/img/saturn.png">
+            </label>
+        </div>
+        <div id="conditions-container">
+            <input type="checkbox" id="aerial-spawn-checkbox" name="aerial-spawn" value="aerial-spawn">
+            <label for="aerial-spawn-checkbox">Aerial Spawn</label><br>
+            <input type="checkbox" id="IBG-checkbox" name="ibg" value="ibg" disabled>
+            <label for="IBG-checkbox">IBG</label><br>
+        </div>
+    </div>
+    <hr>
+    <div id="content-container">
+        <div id="character-select">
+            <h3>Character Sequence</h3>
+            <div id="css-container">
+                <div id="css"></div>
+            </div>
+            <div id="char-seq-display">
+                <button id="clear-button" class="control-button" onclick="clearSeq()">Clear</button>
+                <div id="char-seq-container"></div>
+                <button id="undo-button" class="control-button" onclick="undoChar()">Undo</button>
+                <p id="character-count" class="empty-count">0/9</p>
+            </div>
+            <hr>
+            <div id="lower-control-container">
+                <button id="reset-button" class="control-button" onclick="reset()">Reset</button>
+                <button id="search-button" class="control-button" onclick="searchForSeed()" disabled>Search</button>
+            </div>
+            
+        </div>
+        <div id="results-container">
+            <p id="current-seed">Current Seed: <span id="seed-span" class='seed-text'></span></p>
+            <div id="results">
+                <p id="summary"></p>
+                <p id="actions"></p>
+            </div>
+        </div>
     </div>
 </body>
 
-<script src="{{url_for('static', filename='js/script.js')}}"></script>
+<script src="{{url_for('static', filename='js/script.js')}}" type="module"></script>
 </html>
