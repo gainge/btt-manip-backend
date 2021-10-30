@@ -272,9 +272,11 @@ function processSeed(seed) {
     seedSpan.innerHTML = '0x' + seedString;
 
     // Search for target event
-    let aerialSpawn = document.getElementById('aerial-spawn-checkbox').checked;
+    let mismatch = document.getElementById('mismatch-checkbox').checked;
+    let IBG = document.getElementById('IBG-checkbox').checked;
+    let spawnCondition = document.getElementById('input[name="spawn"]:checked').value;
     let selectedItem = document.querySelector('input[name="item"]:checked').value;
-    let events = buildPullEventList(aerialSpawn, selectedItem);
+    let events = buildPullEventList(mismatch, spawnCondition, IBG, selectedItem);
     let searchResult = searchForEvent(events, seed);
 
     // Clear summary block for result

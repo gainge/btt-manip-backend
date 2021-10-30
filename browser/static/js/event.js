@@ -103,14 +103,35 @@ const buildCharacterEvents = (characters) => {
   return events;
 }
 
-const buildPullEventList = (aerialSpawn, selectedItem) => {
+const buildPullEventList = (mismatch, spawnCondition, IBG, selectedItem) => {
   let events = [];
-  
-  if (aerialSpawn) { // TODO: add support for IBG lol
-    events.push(new DelayEvent(43));
-  } else {
-    events.push(new DelayEvent(12));
+  let delay = 0;
+
+  if (mismatch) {
+    switch (spawnCondition) {
+      case 'ground-spawn':
+        delay = 12;
+        break;
+      case 'aerial-spawn':
+        delay = 43;
+        break;
+      case 'luigi':
+        delay = 14; // Why you gotta be like this, luigi
+        break;
+      case 'seak':
+        delay = 5;
+        break;
+      default:
+        delay = 12;
+        break;
+    }
   }
+
+  if (IBG) {
+    delay++; // Add 1 roll for IBG :)
+  }
+
+  events.push(new DelayEvent(delay));
 
   // Add item pull event
   events.push(new IntEvent(128, 0, 0));
