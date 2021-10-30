@@ -45,4 +45,4 @@ def getSeed():
 
 if __name__ == '__main__':
     print('Running app at: http://localhost:5000/')
-    app.run('0.0.0.0')
+    app.run(host='0.0.0.0')
