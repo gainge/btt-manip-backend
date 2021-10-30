@@ -24,5 +24,4 @@ def getSeed():
 
 if __name__ == '__main__':
     print('Running app at: http://localhost:5000/')
-    # webbrowser.open('http://localhost:5000/', new=2)
-    app.run(debug=True, host='localhost', port=5000)
+    app.run('0.0.0.0')
