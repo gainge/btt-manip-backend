@@ -4,7 +4,13 @@ Web tool for Melee RNG manipulation in Peach's break the targets.
 Use the CSS to locate your seed then perform the specified actions to manip.
 
 # Usage
-Roll random characters in-game, and enter them with the UI on the page. Click the "search" button once enough characters have been entered.
+Every manip consists of two parts:
+* Locating the Seed by rolling random characters
+* Performing the Manip via in-game actions
+
+To Manip for a pull:
+
+**Roll** random characters in-game and enter them with the UI on the page. Click the "search" button once enough characters have been entered.
 
 The first search requires 9 characters, while all subsequent searches require at least 4.
 
@@ -22,9 +28,9 @@ Target: 1077 rolls
 1 - Up Tilt (27)
 ```
 
-Perform the specified actions in __Peach's break the targets__ to perform the manip.
+**Perform** the specified actions in __Peach's break the targets__ to perform the manip.
 
-For a nice, long example of what it looks like to manip, see [this video](https://youtu.be/K2MecScQkx8)
+For a good (very long) example of what it looks like to manip, see [this video](https://youtu.be/K2MecScQkx8)
 
 ***Note*: It's possible for your game's seed and the application's internal seed to become desynced for a number of reasons. If you feel this may have happened, you can always click the "reset" button to re-locate the seed with a new 9-character sequence
 
