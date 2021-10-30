@@ -273,6 +273,7 @@ function processSeed(seed) {
       let actionSequence = buildActionSequence(searchResult.interval);
 
       displayActionSequence(actionSequence, searchResult.interval);
+      isFirstSearch = false; // Update flag for future searches
     } else {
       // Bummer dude
       alert(`Event not found within ${EVENT_SEARCH_MAX_ITERATIONS} seeds`);
@@ -294,7 +295,6 @@ function searchForSeed() {
   // First search?
   if (isFirstSearch) {
     searchForNewSeed();
-    isFirstSearch = false; // Update flag for future
     return;
   }
 
