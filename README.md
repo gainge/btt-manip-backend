@@ -42,7 +42,7 @@ This project uses Flask and Pybind, and can be run locally if you have python in
 First clone the repository and install the necessary dependencies:
 
 
-`pip install -r requirements.txt`
+`python3 -m pip install -r requirements.txt`
 
 Then, build the seed-locating library by following the [build instructions for Pybind.](https://pybind11.readthedocs.io/en/stable/compiling.html?highlight=dynamic_lookup#building-manually)
 
@@ -51,3 +51,5 @@ Then, build the seed-locating library by following the [build instructions for P
 
 ### For MacOS
 `c++ -O3 -Wall -shared -std=c++11 -undefined dynamic_lookup $(python3 -m pybind11 --includes) rng.cpp -o rng$(python3-config --extension-suffix)`
+
+Then you can run the project with `python3 app.py` and visit it at `http://localhost:5000`
