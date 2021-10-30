@@ -31,7 +31,7 @@ Target: 1077 rolls
 1 - Up Tilt (27)
 ```
 
-**Perform** the specified actions in __Peach's break the targets__ to execute the manip.
+**Perform** the specified actions in __Peach's break the targets__ to execute the manip. After completing the manip, your next run will start at the configured pull.
 
 For a good (very long) example of what it looks like to manip, see [this video](https://youtu.be/K2MecScQkx8)
 
