@@ -1,9 +1,7 @@
 # Peach BTT RNG Manip
-Web tool for Melee RNG manipulation in Peach's break the targets.
+Web tool for Melee RNG manipulation in Peach's break the targets.  Use the CSS to locate your seed then perform the specified actions to manip.
 
-Use the CSS to locate your seed then perform the specified actions to manip.
-
-This project is heavily inspired by and based on the previous manip work done by Savestate https://github.com/Savestate2A03/ssbm_rng_manip/
+This project is heavily inspired by and based on the previous manip work done by Savestate https://github.com/Savestate2A03/ssbm_rng_manip/. Huge thanks to them and their contributions.
 
 # Usage
 Every manip consists of two parts:
