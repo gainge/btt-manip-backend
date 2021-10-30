@@ -345,14 +345,19 @@ function searchForNewSeed() {
     url = url + arraySpecifier + '=' + charSeq[i];
   }
 
+  // Disable search during query
+  document.getElementById('search-button').disabled = true;
+  // Update seed string to indicate search
+  document.getElementById('seed-span').innerHTML = 'Searching...';
+
   fetch(url)
     .then(function (response) {
+      clearResults();
       if (!response.ok) {
         throw new Error(`Status Code: ${response.status} `);
       }
       return response.json();
     }).then(function (result) {
-      clearResults();
       let seed = result.seed
 
       // Check that seed, dog
@@ -364,7 +369,9 @@ function searchForNewSeed() {
     }).catch(function(error) {
       alert(`Error Executing Search. ${error}`);
       console.log("Fetch error: " + error);
-    });
+    }).finally(() => {
+      document.getElementById('search-button').disabled = false;
+    })
 
 }
 
