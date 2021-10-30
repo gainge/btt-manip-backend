@@ -287,7 +287,7 @@ function processSeed(seed) {
       displaySearchResult(summary, searchResult);
 
       // TODO: handle IBG for spawn load stuff lol
-      let actionSequence = buildActionSequence(searchResult.interval);
+      let actionSequence = buildActionSequence(searchResult.interval, IBG);
 
       displayActionSequence(actionSequence, searchResult.interval);
       isFirstSearch = false; // Update flag for future searches
