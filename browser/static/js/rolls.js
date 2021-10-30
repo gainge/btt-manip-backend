@@ -84,18 +84,11 @@ const findActionSequence = (total, actions) => {
   return actionSequence;
 }
 
-const buildActionSequence = (rolls, IBG = false) => {
+const buildActionSequence = (rolls) => {
   // TODO: filter actions based on mid-run manip setting
   // Maybe should do that in calling function?
   let actions = MANIP_ACTIONS;
   let actionSequence = new Map();
-
-  // Check for IBG
-  if (IBG) {
-    STAGE_LOAD_ACTION.rolls = 13;
-  } else {
-    STAGE_LOAD_ACTION.rolls = 12;
-  }
 
   if (rolls > IN_GAME_THRESHOLD) {
     actionSequence = findActionSequence(rolls - STAGE_LOAD_ACTION.rolls, actions);

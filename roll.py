@@ -115,7 +115,7 @@ def getActionSequence(rollCount, isCSSManip):
         available_actions = list(filter(lambda x: not x.is_css, items))
     else:
         if rollCount > IN_GAME_THRESHOLD: # Determine if the roll-count is low enough stay in CSS
-            adjusted_rolls -= STAGE_LOAD_ROLLS # TODO: add support for IBG, 13 rolls instead of 12
+            adjusted_rolls -= STAGE_LOAD_ROLLS
         else:
             # Roll count too low, do not use in-game actions
             available_actions = list(filter(lambda x: x.is_css, items))

@@ -103,9 +103,9 @@ const buildCharacterEvents = (characters) => {
   return events;
 }
 
-const buildPullEventList = (mismatch, spawnCondition, IBG, selectedItem) => {
+const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
   let events = [];
-  let delay = 0;
+  let delay = 12;
 
   if (mismatch) {
     switch (spawnCondition) {
@@ -125,10 +125,6 @@ const buildPullEventList = (mismatch, spawnCondition, IBG, selectedItem) => {
         delay = 12;
         break;
     }
-  }
-
-  if (IBG) {
-    delay++; // Add 1 roll for IBG :)
   }
 
   events.push(new DelayEvent(delay));

@@ -273,10 +273,9 @@ function processSeed(seed) {
 
     // Search for target event
     let mismatch = document.getElementById('mismatch-checkbox').checked;
-    let IBG = document.getElementById('IBG-checkbox').checked;
-    let spawnCondition = document.getElementById('input[name="spawn"]:checked').value;
+    let spawnCondition = document.querySelector('input[name="spawn"]:checked').value;
     let selectedItem = document.querySelector('input[name="item"]:checked').value;
-    let events = buildPullEventList(mismatch, spawnCondition, IBG, selectedItem);
+    let events = buildPullEventList(mismatch, spawnCondition, selectedItem);
     let searchResult = searchForEvent(events, seed);
 
     // Clear summary block for result
@@ -286,8 +285,7 @@ function processSeed(seed) {
     if (searchResult.success) {
       displaySearchResult(summary, searchResult);
 
-      // TODO: handle IBG for spawn load stuff lol
-      let actionSequence = buildActionSequence(searchResult.interval, IBG);
+      let actionSequence = buildActionSequence(searchResult.interval);
 
       displayActionSequence(actionSequence, searchResult.interval);
       isFirstSearch = false; // Update flag for future searches
@@ -386,6 +384,7 @@ function searchForNewSeed() {
     }).catch(function(error) {
       alert(`Error Executing Search. ${error}`);
       console.log("Fetch error: " + error);
+      console.log(error);
     }).finally(() => {
       document.getElementById('search-button').disabled = false;
     })
