@@ -331,8 +331,6 @@ function searchForNewSeed() {
     return;
   }
 
-  console.log("I'm a searchin'!");
-
   // Build the URL I guess lol
   let url = '/seed';
   let arraySpecifier = 'seq[]';
