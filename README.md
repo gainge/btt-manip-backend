@@ -39,7 +39,7 @@ For a good (very long) example of what it looks like to manip, see [this video](
 # Building Locally
 This project uses Flask and Pybind, and can be run locally if you have python installed.
 
-First install the necessary dependencies:
+First clone the repository and install the necessary dependencies:
 
 
 `pip install -r requirements.txt`
