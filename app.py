@@ -7,8 +7,6 @@ import api
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
-import webbrowser
-
 # config flask server
 app = Flask(__name__, static_folder='browser/static', template_folder='browser/templates')
 
