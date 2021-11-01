@@ -1,4 +1,4 @@
-import { findSeedDifference, formatHex, isInt, rngAdv, rngInt } from './util.js';
+import { findSeedDifference, formatHex, isInt, isHex, rngAdv, rngInt } from './util.js';
 import { MANIP_ACTIONS, STAGE_LOAD_ACTION, buildActionSequence } from './rolls.js';
 import { EVENT_SEARCH_MAX_ITERATIONS, searchForEvent, buildCharacterEvents, buildPullEventList } from './event.js';
 
@@ -107,6 +107,34 @@ function toggleMismatchOptions() {
     // Hide options
     mismatchOptions.classList.add('none');
   }
+}
+
+function validateManualSeed(seedText) {
+  if (!seedText) return false;
+  let stripped = seedText.replace(/\s/g, '');
+
+  // Parse int
+  let hexString = `0x${stripped}`;
+  if (!isHex(hexString)) return false;
+
+  let intVal = parseInt(hexString, 16);
+
+  // Verify within range [0, 2^32 -1]
+  let withinRange = (intVal >= 0 && intVal <= 2**32 - 1);
+
+  // should be the last check lol
+  return withinRange;
+
+}
+
+
+function onManualSeedInput(e) {
+  // Validate content + enable search accordingly
+  let rawText = e.target.value;
+  let isValidSeed = validateManualSeed(rawText);
+
+  // Update search button state accordingly
+  document.getElementById('search-button').disabled = !isValidSeed;
 }
 
 
@@ -428,6 +456,10 @@ function buildCSS() {
 
 // build the UI lol
 buildCSS();
+
+// Bind seed input event?
+let manualSeedInput = document.getElementById('manual-seed-input');
+manualSeedInput.addEventListener('input', onManualSeedInput);
 
 window.toggleMismatchOptions = toggleMismatchOptions;
 window.searchForSeed = searchForSeed;

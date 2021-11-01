@@ -22,6 +22,11 @@ const formatHex = (n) => {
   return n.toString(16).padStart(8, '0');
 }
 
+const isHex = (value) => {
+  return !isNaN(value) && 
+         !isNaN(parseInt(value, 16));
+}
+
 const isInt = (value) => {
   return !isNaN(value) && 
          parseInt(Number(value)) == value && 
@@ -40,4 +45,4 @@ const rngInt = (seed, max) => {
 
 
 
-export { findSeedDifference, formatHex, isInt, rngAdv, rngInt }
+export { findSeedDifference, formatHex, isInt, isHex, rngAdv, rngInt }
