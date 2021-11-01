@@ -92,6 +92,7 @@ function reset(forceReset = false) {
     // Clear UI
     clearSeq();
     clearResults();
+    clearManualSeed();
   }
 }
 
