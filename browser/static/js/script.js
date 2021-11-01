@@ -80,6 +80,7 @@ const SUCCESSIVE_SEARCH_MIN_CHARS = 4; // Might need to be 5... lol, we'll test
 let charSeq = [];
 let isFirstSearch = true;
 let lastSeed = -1;
+let searchCount = 0;
 
 
 function reset(forceReset = false) {
@@ -94,6 +95,13 @@ function reset(forceReset = false) {
     clearResults();
     clearManualSeed();
   }
+}
+
+function incrementSearchCount() {
+  searchCount++;
+
+  let searchCountSpan = document.getElementById('search-count');
+  searchCountSpan.innerHTML = searchCount;
 }
 
 function toggleMismatchOptions() {
@@ -333,6 +341,7 @@ function processSeed(seed) {
 
       displayActionSequence(actionSequence, searchResult.interval);
       isFirstSearch = false; // Update flag for future searches
+      incrementSearchCount(); // Track searches because that's fun :)
     } else {
       // Bummer dude
       alert(`Event not found within ${EVENT_SEARCH_MAX_ITERATIONS} seeds`);
