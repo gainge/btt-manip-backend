@@ -172,12 +172,26 @@ img.stock-icon {
 
 #manual-seed-prefix {
     font-size: 2em;
+    margin-left: 1rem;
 }
 
 #manual-seed-input {
     font-size: 2em;
     flex: 1;
     margin-right: 1rem;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: lightgray;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: lightgray;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: lightgray;
 }
 
 

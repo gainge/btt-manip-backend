@@ -109,6 +109,13 @@ function toggleMismatchOptions() {
   }
 }
 
+function getManualSeedText() {
+  let manualSeedInput = document.getElementById('manual-seed-input');
+  let rawText = manualSeedInput.value;
+
+  return rawText.replace(/\s/g, '');
+}
+
 function validateManualSeed(seedText) {
   if (!seedText) return false;
   let stripped = seedText.replace(/\s/g, '');
@@ -130,7 +137,7 @@ function validateManualSeed(seedText) {
 
 function onManualSeedInput(e) {
   // Validate content + enable search accordingly
-  let rawText = e.target.value;
+  let rawText = getManualSeedText();
   let isValidSeed = validateManualSeed(rawText);
 
   // Update search button state accordingly
@@ -243,6 +250,9 @@ function addCharToSeq(characterIndex) {
 
   // Update character count
   updateCharSeqDisplay();
+
+  // Clear manual seed when entering characters
+  clearManualSeed();
 }
 
 function undoChar() {
@@ -262,6 +272,11 @@ function clearSeq() {
 
   // Clear character count
   updateCharSeqDisplay();
+}
+
+function clearManualSeed() {
+  let manualSeedInput = document.getElementById('manual-seed-input');
+  manualSeedInput.value = "";
 }
 
 function clearResults() {
@@ -328,13 +343,25 @@ function processSeed(seed) {
     reset(true);
   }
 
-  // Clear character sequence
+  // Clear character sequence + manual entry
   clearSeq();
 }
 
 
 
 function searchForSeed() {
+  // Check for manual seed entry
+  let manualSeed = getManualSeedText();
+  if (validateManualSeed(manualSeed)) {
+    // Search for the seed, lol
+    clearResults();
+    let seed = parseInt(manualSeed, 16);
+    processSeed(seed);
+    clearManualSeed();
+    return;
+  }
+
+
   // First search?
   if (isFirstSearch) {
     searchForNewSeed();
