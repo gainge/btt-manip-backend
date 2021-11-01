@@ -160,6 +160,27 @@ img.stock-icon {
     height: 2.5rem;
 }
 
+
+.manual-entry-label {
+    margin: 0;
+    align-self: center;
+}
+
+#manual-entry-label {
+    padding: 0 0.5rem 0 1rem;
+}
+
+#manual-seed-prefix {
+    font-size: 2em;
+}
+
+#manual-seed-input {
+    font-size: 2em;
+    flex: 1;
+    margin-right: 1rem;
+}
+
+
 .hidden {
     visibility: hidden;
 }
