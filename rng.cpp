@@ -269,11 +269,9 @@ bool seedYieldsCharSequence(uint32_t* seed, CHARACTER characters[], int numChars
  * 
  * @param characters Character sequence that is being queried
  * @param numChars Number of characters in the passed event array
- * @return uint32_t Detected seed. 0 if no seed found, which is not really an effective sentinel but w/e rofl
- might change this to return long, and just cast the seed
- that way I could return -1 if I wanted
+ * @return long long Detected seed. -1 if no seed found
  */
-long locateCharSequence_(CHARACTER characters[], int numChars) {
+long long locateCharSequence_(CHARACTER characters[], int numChars) {
     // Check against 1-character sequences
     if (numChars <= 1) return 0;
     
@@ -291,7 +289,7 @@ long locateCharSequence_(CHARACTER characters[], int numChars) {
         // Check this seed for the character sequence
         // Pass in a sub-array since we've accounted for the first character
         if (seedYieldsCharSequence(&trialSeed, &characters[1], numChars - 1)) {
-            return (long) trialSeed; // Return seed produced at end of sequence
+            return (long long) trialSeed; // Return seed produced at end of sequence
         }
         
         // Move to the next seed
