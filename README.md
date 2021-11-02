@@ -33,6 +33,8 @@ Target: 1077 rolls
 
 **Perform** the specified actions in __Peach's break the targets__ to execute the manip. After completing the manip, your next run will start at the configured pull.
 
+![Example of manip in process](https://i.imgur.com/mqtg0P3.png "Example manip action")
+
 For a good (very long) example of what it looks like to manip, see [this video](https://youtu.be/K2MecScQkx8)
 
 ***Note*: It's possible for your game's seed and the application's internal seed to become desynced for a number of reasons. If you feel this may have happened or keep missing pulls, you can always click the "reset" button to re-locate the seed with a new 9-character sequence
