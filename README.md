@@ -27,7 +27,7 @@ Target: 1077 rolls
 1 - Stage Load (12)
 2 - Charged Upsmash (400)
 2 - Jump Fair Land (88)
-1 - Jump Airdodge (62)
+1 - Jump Airdodge Land (62)
 1 - Up Tilt (27)
 ```
 
