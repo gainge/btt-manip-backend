@@ -45,6 +45,8 @@ h3 {
 #search-count-label {
     margin: 0;
     float: right;
+    color: #f7f7f7;
+    cursor: default;
 }
 
 
