@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 
-// c++ -O3 -Wall -shared -std=c++11 -undefined dynamic_lookup $(python3 -m pybind11 --includes) cpp/rng.cpp -o rng$(python3-config --extension-suffix)
+// c++ -O3 -Wall -shared -std=c++11 -undefined dynamic_lookup $(python3 -m pybind11 --includes) rng.cpp -o rng$(python3-config --extension-suffix)
 namespace py = pybind11;
 
 
@@ -15,6 +15,12 @@ void rng_adv(uint32_t *seed) {
 uint32_t rng_int(uint32_t *seed, uint32_t max) {
     uint32_t top_bits = *seed >> 16;
     return (max * top_bits) >> 16;
+}
+
+bool checkSecondChar(uint32_t seed, int secondChar) {
+    rng_adv(&seed);
+    rng_adv(&seed);
+    return (rng_int(&seed, 25) == secondChar);
 }
 
 /**
@@ -272,29 +278,61 @@ bool seedYieldsCharSequence(uint32_t* seed, CHARACTER characters[], int numChars
  * @return long long Detected seed. -1 if no seed found
  */
 long long locateCharSequence_(CHARACTER characters[], int numChars) {
-    // Check against 1-character sequences
-    if (numChars <= 1) return 0;
+    if (numChars == 0) return -1; // Invalid seq length
     
-    // Ok, now we actually have to code this thing
-    // First we need to construct the loop from the passed character
     int startingChar = characters[0];
+    int secondChar = characters[1];
     uint32_t seed = CHAR_RANGES[startingChar][0];
     uint32_t range = CHAR_RANGES[startingChar][1];
+    long i = 0;
     
-    for (long i = 0; i < range; i++) { // Use long + range to avoid overflow @ index 24
+    if (numChars == 1) return seed; // 1 Char seq, just return first seed lol
+    
+    // find first instance of second char!
+    while (!checkSecondChar(seed, secondChar)) {
+        seed++; // Walk until we find a valid starting point for the sequence
+        i++;
+    }
+    
+    // actual seq search loop
+    do {
         uint32_t trialSeed = seed;
         // Advance the seed once
         rng_adv(&trialSeed);
         
-        // Check this seed for the character sequence
-        // Pass in a sub-array since we've accounted for the first character
+        // check the current seed for a sequence match
+        // Really this could start from the 3rd character because we've already validated the 2nd but w/e
         if (seedYieldsCharSequence(&trialSeed, &characters[1], numChars - 1)) {
             return (long long) trialSeed; // Return seed produced at end of sequence
+        } else {
+            // We need to do some seed advancing lol
+            // Default is +3 to get to next instance of second character (gap of 2 seeds)
+            seed += 3;
+            i += 3;
+            
+            if (i >= range) break; // OOB check
+            // Validate second char at new position
+            if (checkSecondChar(seed, secondChar)) continue; // valid, next loop
+            
+            // Failed, advance seed and check again further down
+            // add additional 110 for total offset 113 (112 seed gap)
+            seed += 110;
+            i += 110;
+            
+            if (i >= range) break;
+            if (checkSecondChar(seed, secondChar)) continue; // Valid, next loop
+            
+            // Failed again, add 3 more to handle the last case (116 offset, 115 seed gap)
+            seed += 3;
+            i += 3;
+            
+            if (i >= range) break;
+            // Assert valid second char one last time
+            // If this fails everything I've relied on in the world is shattered
+            if (!checkSecondChar(seed, secondChar)) break;
         }
         
-        // Move to the next seed
-        seed++;
-    }
+    } while (i < range);
     
     return -1;
 }
