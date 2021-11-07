@@ -23,6 +23,14 @@ bool checkSecondChar(uint32_t seed, int secondChar) {
     return (rng_int(&seed, 25) == secondChar);
 }
 
+uint32_t advanceSeedN(uint32_t seed, int n) {
+    for (int i = 0; i < n; i++) {
+        rng_adv(&seed);
+    }
+    
+    return seed;
+}
+
 /**
  * @brief Descriptor for a seed event detection
  * 
