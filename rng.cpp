@@ -294,7 +294,7 @@ long long locateCharSequence_(CHARACTER characters[], int numChars) {
     uint32_t seed = CHAR_RANGES[startingChar][0];
     uint32_t range = CHAR_RANGES[startingChar][1];
     
-    if (numChars == 1) return advanceSeedN(seed, 2); // 1 Char seq, just return first available seed lol
+    if (numChars == 1) return advanceSeedN(seed, 1); // 1 Char seq, just return first available seed lol
     
     long i = 0;
     
@@ -304,7 +304,7 @@ long long locateCharSequence_(CHARACTER characters[], int numChars) {
         i++;
     }
     
-    if (numChars == 2) return advanceSeedN(seed, 4); // 2 Char seq, return first available again
+    if (numChars == 2) return advanceSeedN(seed, 3); // 2 Char seq, return first available again
     
     // actual seq search loop
     while (true) {
