@@ -129,24 +129,34 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
 
   events.push(new DelayEvent(delay));
 
-  // Add item pull event
-  events.push(new IntEvent(128, 0, 0));
+  // Check for item or turnip (stitch) pull
+  if (selectedItem === "hrc_stitch") {
+    // Add turnip pull event
+    events.push(new IntEvent(128, 0, 0));
+    // Add double stitch rolls
+    events.push(new IntEvent(58, 57, 57));
+    events.push(new IntEvent(58, 57, 57));
+  } else {
+    // Add item pull event
+    events.push(new IntEvent(128, 0, 0));
 
-  // Add item specificity based on settings
-  switch (selectedItem) {
-    case "beamsword":
-      events.push(new IntEvent(6, 5, 5));
-      break;
-    case "bomb":
-      events.push(new IntEvent(6, 0, 1));
-      break;
-    case "saturn":
-      events.push(new IntEvent(6, 2, 4));
-      break;
-    default:
-      alert(`unknown item value! [${selectedItem}]`);
-      break;
+    // Add item specificity based on settings
+    switch (selectedItem) {
+      case "beamsword":
+        events.push(new IntEvent(6, 5, 5));
+        break;
+      case "bomb":
+        events.push(new IntEvent(6, 0, 1));
+        break;
+      case "saturn":
+        events.push(new IntEvent(6, 2, 4));
+        break;
+      default:
+        alert(`unknown item value! [${selectedItem}]`);
+        break;
+    }
   }
+
 
   return events;
 }
