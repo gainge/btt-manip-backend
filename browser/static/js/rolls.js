@@ -44,6 +44,7 @@ const RANDOM_TAG_ACTION = MANIP_ACTIONS[1];
 const RANDOM_CHAR_ACTION = MANIP_ACTIONS[2];
 const STAGE_LOAD_ACTION = MANIP_ACTIONS[4];
 const DP_MAX = 10000000000;
+const PORT_ADVANCE_THRESHOLD = 5000; // Number of rolls when we switch to using the CSS ports
 
 const findActionSequence = (total, actions) => {
   let dp = Array(total + 1).fill(DP_MAX);
@@ -115,4 +116,4 @@ const buildActionSequence = (rolls) => {
   return actionSequence;
 }
 
-export { MANIP_ACTIONS, IN_GAME_THRESHOLD, RANDOM_TAG_ACTION, RANDOM_CHAR_ACTION, STAGE_LOAD_ACTION, findActionSequence, buildActionSequence }
+export { MANIP_ACTIONS, IN_GAME_THRESHOLD, RANDOM_TAG_ACTION, RANDOM_CHAR_ACTION, STAGE_LOAD_ACTION, PORT_ADVANCE_THRESHOLD, findActionSequence, buildActionSequence }

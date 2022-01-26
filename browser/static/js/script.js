@@ -1,5 +1,5 @@
 import { findSeedDifference, formatHex, isInt, isHex, rngAdv, rngInt } from './util.js';
-import { MANIP_ACTIONS, STAGE_LOAD_ACTION, buildActionSequence } from './rolls.js';
+import { MANIP_ACTIONS, PORT_ADVANCE_THRESHOLD, STAGE_LOAD_ACTION, buildActionSequence } from './rolls.js';
 import { EVENT_SEARCH_MAX_ITERATIONS, searchForEvent, buildCharacterEvents, buildPullEventList } from './event.js';
 
 
@@ -309,6 +309,27 @@ function displaySearchResult(parent, searchResult) {
   console.log('Interval: ' + searchResult.interval);
 }
 
+function displayPortAdvance(rolls) {
+  let actionsBlock = document.getElementById('actions');
+
+  let seconds = rolls / 4833.9;
+  if (seconds > 0.25) {
+    seconds -= 0.25;
+  }
+  let minutes = Math.floor(seconds / 60);
+  // Update seconds to account for possible minutes
+  seconds = seconds % 60;
+
+  let minutesString = `${minutes} minute${minutes >= 2 ? 's' : ''}`;
+  let secondsString = `${(seconds - 0.25).toFixed(2)} second${(seconds - 0.25) >= 2 ? 's' : ''}`;
+  let duration = `${minutes ? minutesString + ' and ' : ''}${secondsString}`;
+
+  addActionLine(actionsBlock, `Roll count exceeds ${PORT_ADVANCE_THRESHOLD}!`);
+  addActionLine(actionsBlock, 'Start manip on the VS CSS');
+  addActionLine(actionsBlock, '--------------------------------');
+  addActionLine(actionsBlock, `Open two character ports for ${duration} and continue search!`);
+}
+
 
 // Found seed, now to search for an event
 function processSeed(seed) {
@@ -338,9 +359,18 @@ function processSeed(seed) {
     if (searchResult.success) {
       displaySearchResult(summary, searchResult);
 
-      let actionSequence = buildActionSequence(searchResult.interval);
+      let rolls = searchResult.interval;
 
-      displayActionSequence(actionSequence, searchResult.interval);
+      // Check for excessively large rolls, should default to CSS
+      if (rolls > PORT_ADVANCE_THRESHOLD) {
+        // Whew boy
+        displayPortAdvance(rolls);
+      } else {
+        let actionSequence = buildActionSequence(rolls);
+
+        displayActionSequence(actionSequence, rolls);
+      }
+      
       isFirstSearch = false; // Update flag for future searches
       incrementSearchCount(); // Track searches because that's fun :)
     } else {
