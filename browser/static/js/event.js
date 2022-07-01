@@ -107,7 +107,7 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
   let events = [];
   let delay = 12;
 
-  if (mismatch) {
+  if (mismatch && selectedItem !== "hrc_stitch") {
     switch (spawnCondition) {
       case 'ground-spawn':
         delay = 12;
@@ -125,6 +125,11 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
         delay = 12;
         break;
     }
+  } else if (selectedItem === "hrc_stitch") {
+    // HRC roll count for the countdown is inconsistent, but 90% of runs
+    // consume 121 or 122 rolls, so a delay of 123 lets us guarantee that a 2 frame
+    // stitch window will be available in the first 3 frames of 90% of runs
+    delay = 123;
   }
 
   events.push(new DelayEvent(delay));
@@ -132,7 +137,7 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
   // Check for item or turnip (stitch) pull
   if (selectedItem === "hrc_stitch") {
     // Add turnip pull event
-    events.push(new IntEvent(128, 0, 0));
+    events.push(new IntEvent(128, 1, 127));
     // Add double stitch rolls
     events.push(new IntEvent(58, 57, 57));
     events.push(new IntEvent(58, 57, 57));
@@ -156,7 +161,6 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
         break;
     }
   }
-
 
   return events;
 }
