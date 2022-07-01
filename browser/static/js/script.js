@@ -164,7 +164,7 @@ function addActionLine(parent, text) {
 
 
 function printAction(parent, action, count) {
-  addActionLine(parent, `${count} - ${action.label} (${action.rolls})`);
+  addActionLine(parent, `${count} x ${action.label} (${action.rolls})`);
 }
 
 
