@@ -246,7 +246,8 @@ function updateCharSeqDisplay() {
 function addCharToSeq(characterIndex) {
   // check for super long sequences I guess
   if (charSeq.length > 9) {
-    return;
+    // pop one off the list!
+    charSeq = charSeq.slice(1);
   }
 
   console.log('adding character: ' + characterIndex);
