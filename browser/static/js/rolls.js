@@ -3,12 +3,14 @@ class Action {
   rolls
   frames
   isCSS
+  priority
 
-  constructor(label, rolls, frames, isCSS) {
+  constructor(label, rolls, frames, isCSS, priority) {
     this.label = label;
     this.rolls = rolls;
     this.frames = frames;
     this.isCSS = isCSS;
+    this.priority = priority;
   }
 
   getValue() {
@@ -19,22 +21,22 @@ class Action {
 // TODO: tweak these, tag and character should probably be less frames realistically
 // A lot of the jump ones are rough estimates
 const MANIP_ACTIONS = [
-  new Action('Idle Animation', 1, 360, false),
-  new Action('Random Tag', 1, 15, true),
-  new Action('Random Character', 2, 15, true),
-  new Action('Shield', 9, 40, false),
-  new Action('Stage Load', 12, 400, true),
-  new Action('Standing Grab', 15, 35, false),
-  new Action('Up Tilt', 27, 39, false),
-  new Action('Upsmash', 40, 45, false),
-  new Action('Jump Airdodge Land', 62, 96, false),
-  new Action('Jump Land', 63, 86, false),
-  new Action('Jump Double-Jump Airdodge Land', 72, 165, false),
-  new Action('Jump Double-Jump Land', 73, 150, false),
-  new Action('Jump Fair Land', 88, 96, false),
-  new Action('Jump Double-Jump Fair Land', 98, 144, false),
-  new Action('Charged Upsmash', 400, 125, false),
-  new Action('Charged Downsmash', 430, 140, false),
+  new Action('Idle Animation',                  1,    360,  false,  0),
+  new Action('Random Tag',                      1,    15,   true,   0),
+  new Action('Random Character',                2,    15,   true,   0),
+  new Action('Shield',                          9,    40,   false,  0),
+  new Action('Stage Load',                      12,   400,  true,   5),
+  new Action('Standing Grab',                   15,   35,   false,  0),
+  new Action('Up Tilt',                         27,   39,   false,  1),
+  new Action('Upsmash',                         40,   45,   false,  2),
+  new Action('Jump Airdodge Land',              62,   96,   false,  0),
+  new Action('Jump Land',                       63,   86,   false,  0),
+  new Action('Jump Double-Jump Airdodge Land',  72,   165,  false,  0),
+  new Action('Jump Double-Jump Land',           73,   150,  false,  0),
+  new Action('Jump Fair Land',                  88,   96,   false,  0),
+  new Action('Jump Double-Jump Fair Land',      98,   144,  false,  0),
+  new Action('Charged Upsmash',                 400,  125,  false,  3),
+  new Action('Charged Downsmash',               430,  140,  false,  3),
 ];
 
 const IN_GAME_THRESHOLD = 40;
@@ -81,7 +83,9 @@ const findActionSequence = (total, actions) => {
     }
   }
 
-  return actionSequence;
+  const sortedSequence = new Map([...actionSequence.entries()].sort((a, b) => b[0].priority - a[0].priority));
+  
+  return sortedSequence;
 }
 
 const buildActionSequence = (rolls) => {
