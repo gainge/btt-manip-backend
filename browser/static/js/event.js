@@ -141,6 +141,7 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
     // Add double stitch rolls
     events.push(new IntEvent(58, 57, 57));
     events.push(new IntEvent(58, 57, 57));
+    events.push(new IntEvent(58, 57, 57));
   } else {
     // Add item pull event
     events.push(new IntEvent(128, 0, 0));
