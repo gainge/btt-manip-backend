@@ -210,6 +210,7 @@ function buildCharIconList() {
 
     let icon = document.createElement('img');
     icon.classList.add('stock-icon');
+    icon.ondragstart = () => false;
     icon.setAttribute('src', STOCK_ICONS[characterIndex]);
 
     parent.appendChild(icon);
@@ -499,6 +500,7 @@ function buildCSS() {
     for (let col = 0; col < 9; col++) {
       let icon = document.createElement('img');
       icon.classList.add('css-icon');
+      icon.ondragstart = () => false;
 
       if (row == 2 && (col == 0 || col == 8)) {
         // Random space, hide element and move on
