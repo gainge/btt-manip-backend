@@ -50,11 +50,13 @@ h3 {
 }
 
 
-
-
 #content-container {
     display: flex;
     flex-direction: row;
+}
+
+#character-select {
+    user-select: none;
 }
 
 @media screen and (max-width:990px) {
