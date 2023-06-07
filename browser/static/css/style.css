@@ -49,6 +49,10 @@ h3 {
     filter: drop-shadow(0px 0px 4px gray);
 }
 
+#secret {
+    transition: opacity 1s;
+}
+
 #mismatch-control {
     margin-left: 2rem;
 }
@@ -222,6 +226,7 @@ img.stock-icon {
 
 .hidden {
     visibility: hidden;
+    opacity: 0;
 }
 
 .none {

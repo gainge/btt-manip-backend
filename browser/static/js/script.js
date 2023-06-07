@@ -72,7 +72,19 @@ const FIRST_SEARCH_MAX_CHARS = 9;
 const FIRST_SEARCH_MIN_CHARS = 9;
 const SUCCESSIVE_SEARCH_MAX_CHARS = 9;
 const SUCCESSIVE_SEARCH_MIN_CHARS = 4; // Might need to be 5... lol, we'll test
-
+const MAX_KEY_SEQ_LENGTH = 10;
+const KONAMI = [
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowLeft",
+  "ArrowRight",
+  "KeyB",
+  "KeyA"
+];
 
 
 
@@ -81,6 +93,7 @@ let charSeq = [];
 let isFirstSearch = true;
 let lastSeed = -1;
 let searchCount = 0;
+let keySeq = [];
 
 
 function reset(forceReset = false) {
@@ -522,6 +535,20 @@ function buildCSS() {
 
 }
 
+function arrayEquals(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 
 
 // build the UI lol
@@ -536,3 +563,16 @@ window.searchForSeed = searchForSeed;
 window.undoChar = undoChar;
 window.clearSeq = clearSeq;
 window.reset = reset;
+
+addEventListener('keyup', (event) => {
+  keySeq.push(event.code)
+  if (keySeq.length > MAX_KEY_SEQ_LENGTH) {
+    keySeq = keySeq.slice(1);
+  }
+
+  if (arrayEquals(keySeq, KONAMI)) {
+    document.getElementById('secret').classList.remove('hidden');
+    console.log(':targetprey:');
+  }
+
+})
