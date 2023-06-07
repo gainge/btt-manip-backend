@@ -18,6 +18,9 @@ h3 {
 
 #item-selector {
     margin-bottom: 0.5rem;
+    display: flex;
+    column-gap: 0.3rem;
+    align-items: center;
 }
 
 #item-selector [type=radio] { 
@@ -37,6 +40,14 @@ h3 {
     background-color: #ccc;
 }
 
+#item-selector [type=radio] + img.full-image {
+    width: 3rem;
+    margin-left: 1rem;
+}
+
+#item-selector [type=radio]:checked + img.full-image {
+    filter: drop-shadow(0px 0px 4px gray);
+}
 
 #mismatch-control {
     margin-left: 2rem;

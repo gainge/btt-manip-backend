@@ -47,6 +47,31 @@ class IntEvent extends RngEvent {
   }
 }
 
+class RangeEvent extends RngEvent {
+  range = 0;
+  events = [];
+
+  constructor(range, events) {
+    super();
+    this.range = range;
+    this.events = events;
+  }
+
+  resultsFromSeed(seed) {
+    for (let i = 0; i < this.range; i++) {
+      const [success, resultSeed] = seedYieldsEvents(seed, this.events);
+
+      if (success) {
+        return [success, resultSeed];
+      } else {
+        seed = rngAdv(seed);
+      }
+    }
+
+    return [false, seed]; // I think it's ok to return the advanced seed here?
+  }
+}
+
 const EVENT_SEARCH_MAX_ITERATIONS = 1000000; // 0x100000000 for full range
 
 
@@ -142,6 +167,19 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
     events.push(new IntEvent(58, 57, 57));
     events.push(new IntEvent(58, 57, 57));
     events.push(new IntEvent(58, 57, 57));
+  } else if (selectedItem === "targetprey") {
+    // Target a bomb -> sword in a specific range, first by adding a delay
+    // measured from trial runs https://docs.google.com/spreadsheets/d/1QAKLVQsf37u1Zyv2YzM3rSf8r2cbIqxUoQcaf247aZ8/edit?usp=sharing
+    // Bomb pull
+    events.push(new IntEvent(128, 0, 0));
+    events.push(new IntEvent(6, 0, 1));
+    // Delay for run actions
+    events.push(new DelayEvent(2243));
+    // Finally, add a range event targeting a sword pull, covering 4 standard deviations in run variance
+    events.push(new RangeEvent(290, [
+      new IntEvent(128, 0, 0),
+      new IntEvent(6, 5, 5),
+    ]));
   } else {
     // Add item pull event
     events.push(new IntEvent(128, 0, 0));

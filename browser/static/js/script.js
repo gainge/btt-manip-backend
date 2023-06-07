@@ -305,8 +305,8 @@ function displaySearchResult(parent, searchResult) {
   parent.appendChild(document.createTextNode('Interval: ' + searchResult.interval));
 
   // Log for funsies
-  console.log('Event Seed: ' + formatHex(searchResult.eventSeed));
-  console.log('End Seed: ' + formatHex(searchResult.endSeed));
+  console.log('Event Seed: 0x' + formatHex(searchResult.eventSeed));
+  console.log('End Seed: 0x' + formatHex(searchResult.endSeed));
   console.log('Interval: ' + searchResult.interval);
 }
 
