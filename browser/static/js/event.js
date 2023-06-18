@@ -174,9 +174,9 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
     events.push(new IntEvent(128, 0, 0));
     events.push(new IntEvent(6, 0, 1));
     // Delay for run actions
-    events.push(new DelayEvent(2243));
+    events.push(new DelayEvent(2244));
     // Finally, add a range event targeting a sword pull, covering 4 standard deviations in run variance
-    events.push(new RangeEvent(290, [
+    events.push(new RangeEvent(260, [
       new IntEvent(128, 0, 0),
       new IntEvent(6, 5, 5),
     ]));
