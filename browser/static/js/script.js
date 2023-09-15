@@ -182,7 +182,7 @@ function printAction(parent, action, count) {
 
 
 
-function displayActionSequence(actionSequence, rolls) {
+function displayActionSequence(actionSequence, rolls, seakSpawn) {
   let actionsBlock = document.getElementById('actions');
 
   let numActions = 0;
@@ -194,7 +194,7 @@ function displayActionSequence(actionSequence, rolls) {
   addActionLine(actionsBlock, '----------------------------------');
   addActionLine(actionsBlock, `Achievable in ${numActions} action${numActions == 1 ? '' : 's'}`);
   addActionLine(actionsBlock, '----------------------------------');
-  addActionLine(actionsBlock, 'Manip Stage: [PEACH]');
+  addActionLine(actionsBlock, `Manip Stage: [${seakSpawn ? 'SEAK' : 'PEACH'}]`);
   addActionLine(actionsBlock, `Target: ${rolls} rolls`);
   
   actionsBlock.appendChild(document.createElement('br'));
@@ -366,6 +366,8 @@ function processSeed(seed) {
     let events = buildPullEventList(mismatch, spawnCondition, selectedItem);
     let searchResult = searchForEvent(events, seed);
 
+    const seakSpawn = spawnCondition === 'seak';
+
     // Clear summary block for result
     let summary = document.getElementById('summary');
     summary.innerHTML = '';
@@ -380,9 +382,9 @@ function processSeed(seed) {
         // Whew boy
         displayPortAdvance(rolls);
       } else {
-        let actionSequence = buildActionSequence(rolls);
+        let actionSequence = buildActionSequence(rolls, seakSpawn);
 
-        displayActionSequence(actionSequence, rolls);
+        displayActionSequence(actionSequence, rolls, seakSpawn);
       }
       
       isFirstSearch = false; // Update flag for future searches

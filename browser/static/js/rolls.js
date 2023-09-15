@@ -38,6 +38,7 @@ const MANIP_ACTIONS = [
   new Action('Charged Upsmash',                 400,  125,  false,  3),
   new Action('Charged Downsmash',               430,  140,  false,  3),
 ];
+const SEAK_STAGE_LOAD = new Action('Seak Stage Load', 5, 400, true, 5);
 
 const IN_GAME_THRESHOLD = 40;
 const RANDOM_TAG_ACTION = MANIP_ACTIONS[1];
@@ -89,19 +90,20 @@ const findActionSequence = (total, actions) => {
   return sortedSequence;
 }
 
-const buildActionSequence = (rolls) => {
+const buildActionSequence = (rolls, seakSpawn) => {
   // TODO: filter actions based on mid-run manip setting
   // Maybe should do that in calling function?
   let actions = MANIP_ACTIONS;
   let actionSequence = new Map();
+  const stageLoadAction = seakSpawn ? SEAK_STAGE_LOAD : STAGE_LOAD_ACTION;
 
   if (rolls > IN_GAME_THRESHOLD) {
-    actionSequence = findActionSequence(rolls - STAGE_LOAD_ACTION.rolls, actions);
+    actionSequence = findActionSequence(rolls - stageLoadAction.rolls, actions);
     // Add in the extra stage load manually
-    if (actionSequence.get(STAGE_LOAD_ACTION)) {
-      actionSequence.set(STAGE_LOAD_ACTION, actionSequence.get(STAGE_LOAD_ACTION) + 1);
+    if (actionSequence.get(stageLoadAction)) {
+      actionSequence.set(stageLoadAction, actionSequence.get(stageLoadAction) + 1);
     } else {
-      actionSequence.set(STAGE_LOAD_ACTION, 1);
+      actionSequence.set(stageLoadAction, 1);
     }
   } else {
     // Create custom thing for CSS only
