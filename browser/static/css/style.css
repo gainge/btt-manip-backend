@@ -35,6 +35,10 @@ h3 {
     width: 4rem;
     border-radius: 0.3rem;
 }
+
+#item-selector [type=radio] + img.square-image {
+    border-radius: 0rem;
+}
   
 #item-selector [type=radio]:checked + img {
     background-color: #ccc;

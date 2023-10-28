@@ -180,6 +180,18 @@ const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
       new IntEvent(128, 0, 0),
       new IntEvent(6, 5, 5),
     ]));
+  } else if (selectedItem === 'happysquare') {
+    // Target a sword -> sword in a specific range
+    // Sword pull
+    events.push(new IntEvent(128, 0, 0));
+    events.push(new IntEvent(6, 5, 5));
+    // Delay for run actions
+    events.push(new DelayEvent(556));
+    // Range event for 4 standard deviations (approx. 17 * 4)
+    events.push(new RangeEvent(70, [
+      new IntEvent(128, 0, 0),
+      new IntEvent(6, 5, 5),
+    ]));
   } else {
     // Add item pull event
     events.push(new IntEvent(128, 0, 0));
