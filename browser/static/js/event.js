@@ -72,6 +72,27 @@ class RangeEvent extends RngEvent {
   }
 }
 
+class OptionEvent extends RngEvent {
+  eventSequences = []; // Array of RngEvent sequences
+
+  constructor(eventSequences) {
+    super();
+    this.eventSequences = eventSequences;
+  }
+
+  resultsFromSeed(seed) {
+    for (let i = 0; i < this.eventSequences.length; i++) {
+      let [success, resultSeed] = seedYieldsEvents(seed, this.eventSequences[i]);
+
+      if (success) {
+        return [true, resultSeed];
+      }
+    }
+
+    return [false, seed];
+  }
+}
+
 const EVENT_SEARCH_MAX_ITERATIONS = 1000000; // 0x100000000 for full range
 
 
@@ -130,43 +151,63 @@ const buildCharacterEvents = (characters) => {
 
 const buildPullEventList = (mismatch, spawnCondition, selectedItem) => {
   let events = [];
-  let delay = 12;
 
-  if (mismatch && selectedItem !== "hrc_stitch") {
-    switch (spawnCondition) {
-      case 'ground-spawn':
-        delay = 12;
-        break;
-      case 'aerial-spawn':
-        delay = 43;
-        break;
-      case 'luigi':
-        delay = 14; // Why you gotta be like this, luigi
-        break;
-      case 'seak':
-        delay = 5;
-        break;
-      default:
-        delay = 12;
-        break;
+  if (selectedItem !== "hrc_stitch") {
+    let delay = 12;
+
+    if (mismatch) {
+      switch (spawnCondition) {
+        case 'ground-spawn':
+          delay = 12;
+          break;
+        case 'aerial-spawn':
+          delay = 43;
+          break;
+        case 'luigi':
+          delay = 14; // Why you gotta be like this, luigi
+          break;
+        case 'seak':
+          delay = 5;
+          break;
+        default:
+          delay = 12;
+          break;
+      }
     }
-  } else if (selectedItem === "hrc_stitch") {
-    // HRC roll count for the countdown is inconsistent, but 90% of runs
-    // consume 121 or 122 rolls, so a delay of 123 lets us guarantee that a 2 frame
-    // stitch window will be available in the first 3 frames of 90% of runs
-    delay = 123;
+    
+    events.push(new DelayEvent(delay));
   }
-
-  events.push(new DelayEvent(delay));
 
   // Check for item or turnip (stitch) pull
   if (selectedItem === "hrc_stitch") {
-    // Add turnip pull event
-    events.push(new IntEvent(128, 1, 127));
-    // Add double stitch rolls
-    events.push(new IntEvent(58, 57, 57));
-    events.push(new IntEvent(58, 57, 57));
-    events.push(new IntEvent(58, 57, 57));
+    const doubleStitchEvents = [
+      new IntEvent(128, 1, 127), // turnip pull
+      new IntEvent(58, 57, 57),
+      new IntEvent(58, 57, 57)
+    ]
+
+    events.push(new OptionEvent(
+      [
+        [
+          new DelayEvent(2),
+          new IntEvent(10, 0, 0), // long delay
+          new DelayEvent(122),
+          ...doubleStitchEvents
+        ],
+        [
+          new DelayEvent(2),
+          new IntEvent(10, 1, 5), // short delay
+          new DelayEvent(119),
+          ...doubleStitchEvents
+        ],
+        [
+          new DelayEvent(2),
+          new IntEvent(10, 6, 9), // med delay
+          new DelayEvent(120),
+          ...doubleStitchEvents
+        ]
+      ]
+    ));
   } else if (selectedItem === "targetprey") {
     // Target a bomb -> sword in a specific range, first by adding a delay
     // measured from trial runs https://docs.google.com/spreadsheets/d/1QAKLVQsf37u1Zyv2YzM3rSf8r2cbIqxUoQcaf247aZ8/edit?usp=sharing
